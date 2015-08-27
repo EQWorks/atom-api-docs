@@ -16,7 +16,7 @@ There are three ways for client to supply API `key` and `token`:
 
 * __HTTP Body__ in JSON with fields `key` and `token`, i.e.:
 
-  `{ "key": "{API_KEY}", "token": "{API_TOKEN}"`
+  `{ "key": "{API_KEY}", "token": "{API_TOKEN}" }`
 
 * __URL Query String__ keyed on `key` and `token`, i.e.:
 
