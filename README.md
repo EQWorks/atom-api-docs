@@ -133,7 +133,7 @@ __*__ Denotes optional parameter
        OR
        radius: INT (meters), geocode: [FLOAT (Lat), FLOAT (Long)]
     },
-    *cat: [ STRING (IAB1), STRING (IAB2-2), ... ],
+    *cat: [ STRING (IAB1), STRING (IAB20), ... ],
     device: { mobile: BOOL, tablet: BOOL, desktop: BOOL },
     *demo: {
       gender: { male: BOOL, female: BOOL, unknown: BOOL } OR null
@@ -175,7 +175,7 @@ __*__ Denotes optional parameter
        OR
        radius: INT (meters), geocode: [FLOAT (Lat), FLOAT (Long)]
     },
-    *cat: [ STRING (IAB1), STRING (IAB2-2), ... ],
+    *cat: [ STRING (IAB1), STRING (IAB20), ... ],
     *device: { mobile: BOOL, tablet: BOOL, desktop: BOOL },
     *demo: {
       gender: { male: BOOL, female: BOOL, unknown: BOOL } OR null
