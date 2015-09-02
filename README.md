@@ -126,8 +126,6 @@ __*__ Denotes optional parameter
 ```javascript
 {
     name: STRING,
-    *start: INT (Timestamp),
-    *end: INT (Timestamp),
     geo: {
        geos: [STRING ("CA"), STRING ("CA-ON"), STRING ("CA-ON-Toronto"), ...]
        OR
@@ -137,17 +135,17 @@ __*__ Denotes optional parameter
     device: { mobile: BOOL, tablet: BOOL, desktop: BOOL },
     *demo: {
       gender: { male: BOOL, female: BOOL, unknown: BOOL } OR null
-      age: { "13to18": BOOL, "18to24": BOOL, "25to34": BOOL, "35to54": BOOL, "55+": BOOL } or null
+      age: { "13to17": true, "18to34": true, "35to49": true, "50+": true} or null
     }
 }
 ```
 _Create a new persona for the given campaign_
 
-`start` and `end` will default to the campaign run times (reccomended not to include), and will be modified with changes to the campaign.
-
 `cat` must be a valid IAB category of format IAB# or IAB#-# for sub-categories. These will greatly limit the targetting scope to be cautious
 
 `geo` can include either a list of `geos`: [] or a single `radius: INT (meters), geocode: [FLOAT (Lat), FLOAT (Long)]`.One or the other **must** be supplied. `geos` must be of the form '[Country Shortcode]-[State/Province Shortcode]-[City Name], with variations allowed for whole countries *eg: 'CA' or 'US'* or whole provinces/states *eg: 'CA-ON, CA-QC, US-FL'.
+
+**Startdate and Enddate will be inherited from the campaign**
 
 **Response** will include `{pid: [PERSONA ID]}` to be used in future API calls
 
@@ -168,8 +166,6 @@ __*__ Denotes optional parameter
 ```javascript
 {
     *name: STRING,
-    *start: INT (Timestamp),
-    *end: INT (Timestamp),
     *geo: {
        geos: [STRING ("CA"), STRING ("CA-ON"), STRING ("CA-ON-Toronto"), ...]
        OR
@@ -179,7 +175,7 @@ __*__ Denotes optional parameter
     *device: { mobile: BOOL, tablet: BOOL, desktop: BOOL },
     *demo: {
       gender: { male: BOOL, female: BOOL, unknown: BOOL } OR null
-      age: { "13to18": BOOL, "18to24": BOOL, "25to34": BOOL, "35to54": BOOL, "55+": BOOL } or null
+      age: { "13to17": true, "18to34": true, "35to49": true, "50+": true} or null
     }
 }
 ```
