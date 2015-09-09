@@ -240,3 +240,25 @@ _Edit a specific banner for a given persona_
 
 ####**DELETE** /campaign/**:cid**/persona/**:pid**/banner/**:bid**
 _Detach and hide the given banner._
+
+### Stats
+####**GET** /stats/campaign/**:cid**
+**Requires cuid as query string**
+_Get the summary stats for a campaign_
+
+####**GET** /stats/campaign/**:cid**/timeseries
+**Requires cuid as query string**
+*start can be supplied as query string in form of timestamp*
+*end can be supplied as query string in form of timestamp*
+_Get the timeseries stats for a campaign_
+
+####**GET** /stats/campaign/**:cid**
+**Requires cuid as query string**
+_Get the summary stats for a persona_
+
+####**GET** /stats/campaign/**:cid**
+**Requires cuid as query string**
+*start can be supplied as query string in form of timestamp*
+*end can be supplied as query string in form of timestamp*
+_Get the timeseries stats for a persona_
+
