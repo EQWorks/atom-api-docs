@@ -252,11 +252,11 @@ _Get the summary stats for a campaign_
 *end can be supplied as query string in form of timestamp*
 _Get the timeseries stats for a campaign_
 
-####**GET** /stats/campaign/**:cid**
+####**GET** /stats/campaign/**:cid**/persona/**:pid**
 **Requires cuid as query string**
 _Get the summary stats for a persona_
 
-####**GET** /stats/campaign/**:cid**
+####**GET** /stats/campaign/**:cid**/persona/**:pid**/timeseries
 **Requires cuid as query string**
 *start can be supplied as query string in form of timestamp*
 *end can be supplied as query string in form of timestamp*
