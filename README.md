@@ -12,7 +12,7 @@ There are **2** levels of API 'key/token' pairs for interaction with the API:
 
 We utilize SSL to secure the transfer of these values.
 
-There are three ways for client to supply API `key` and `token`:
+There are two ways for client to supply API `key` and `token`:
 
 * __HTTP Header__ keyed on `x-access-key` and `x-access-token`, i.e.:
   `x-access-superKey: {SUPER_API_KEY}; x-access-superToken: {SUPER_API_TOKEN}`
@@ -35,8 +35,8 @@ Under rare conditions, you should also anticipate some `HTTP 500` returns with J
 
 Most routes in this API will expect a query string of `cuid=[CUSTOMER ID]`, which is returned upon successful creation of a customer.
 
-### Customers (SUPER AUTH METHOD)
-####**POST** /customer
+### Customers
+####**POST** /customer (SUPER AUTH METHOD)
 
 __*__ Denotes optional parameter
 ```javascript
