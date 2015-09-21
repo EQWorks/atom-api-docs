@@ -4,22 +4,22 @@ CRUD API for ATOM, exposing interactions with Customer, Campaign, Persona, and B
 
 ## Authentication
 
-All APIs are authenticated by client supplied API `key/token` pair. Authorization on what the `key/token` pair can access depends on the privilege of the `key`.
+There are **2** levels of API 'key/token' pairs for interaction with the API:
+
+**APP Level Super key/token** Gives your App access to the *Customer Create*, and the *Get Many Customers* routes.
+
+**Customer Level key/token** This is provided as a response to the Customer Creation method, and is to be used for interactions with campaigns/banners/personas/etc. for that specific customer (user).
 
 We utilize SSL to secure the transfer of these values.
 
 There are three ways for client to supply API `key` and `token`:
 
 * __HTTP Header__ keyed on `x-access-key` and `x-access-token`, i.e.:
-
+  `x-access-superKey: {SUPER_API_KEY}; x-access-superToken: {SUPER_API_TOKEN}`
   `x-access-key: {API_KEY}; x-access-token: {API_TOKEN}`
 
-* __HTTP Body__ in JSON with fields `key` and `token`, i.e.:
-
-  `{ "key": "{API_KEY}", "token": "{API_TOKEN}" }`
-
 * __URL Query String__ keyed on `key` and `token`, i.e.:
-
+  `superKey={SUPER_API_KEY}&superToken={SUPER_API_TOKEN}`
   `key={API_KEY}&token={API_TOKEN}`
 
 When your API `key/token` are supplied incorrectly, you will get a few possible `HTTP 4xx` returns with JSON body with information in field `message` that are:
@@ -35,14 +35,14 @@ Under rare conditions, you should also anticipate some `HTTP 500` returns with J
 
 Most routes in this API will expect a query string of `cuid=[CUSTOMER ID]`, which is returned upon successful creation of a customer.
 
-### Customers
+### Customers (SUPER AUTH METHOD)
 ####**POST** /customer
 
 __*__ Denotes optional parameter
 ```javascript
 {
     company: STRING,
-    *email: STRING,
+    email: STRING,
     *name: STRING,
     *address: STRING,
     *country: STRING,
@@ -55,10 +55,23 @@ __*__ Denotes optional parameter
 ```
 _Create a new customer record in ATOM_
 
-**Response** will include `{cuid: [ATOM CUSTOMER ID]}` to be used in future API calls
+**Response** will include:
+```javascript
+{
+    cuid: [ATOM CUSTOMER ID],
+    key: [AUTH_KEY],
+    token: [AUTH_TOKEN]
+}
+```
+These are to be used for that specific customer in future API calls
+
+
+####**GET** /customer/ (SUPER AUTH METHOD)
+_Get an array of customer objects belonging to that SUPER USER_
+
 
 ####**GET** /customer/**:cuid**
-_Get the information about a specific customer_
+_Get the information about a specific customer (self)_
 
 ### Campaigns
 ####**POST** /campaign
