@@ -6,21 +6,21 @@ CRUD API for ATOM, exposing interactions with Customer, Campaign, Persona, and B
 
 There are **2** levels of API 'key/token' pairs for interaction with the API:
 
-**APP Level Super key/token** Gives your App access to the *Customer Create*, and the *Get Many Customers* routes.
+**App level Super key/token** Gives your App access to the *Customer Create*, and the *Get Many Customers* routes.
 
-**Customer Level key/token** This is provided as a response to the Customer Creation method, and is to be used for interactions with campaigns/banners/personas/etc. for that specific customer (user).
+**Customer level key/token** This is provided as a response to the Customer Creation method, and is to be used for interactions with campaigns/banners/personas/etc. for that specific customer (user).
 
 We utilize SSL to secure the transfer of these values.
 
 There are two ways for client to supply API `key` and `token`:
 
-* __HTTP Header__ keyed on `x-access-key` and `x-access-token`, i.e.:
-  `x-access-superKey: {SUPER_API_KEY}; x-access-superToken: {SUPER_API_TOKEN}`
-  `x-access-key: {API_KEY}; x-access-token: {API_TOKEN}`
+* __HTTP Header__ keyed on `x-access-key` and `x-access-token`, or for App level `x-access-superKey` and `x-access-superToken`. i.e.:
+  * Customer level: `x-access-key: {API_KEY}; x-access-token: {API_TOKEN}`
+  * App level: `x-access-superKey: {SUPER_API_KEY}; x-access-superToken: {SUPER_API_TOKEN}`
 
-* __URL Query String__ keyed on `key` and `token`, i.e.:
-  `superKey={SUPER_API_KEY}&superToken={SUPER_API_TOKEN}`
-  `key={API_KEY}&token={API_TOKEN}`
+* __URL Query String__ keyed on `key` and `token`, or for App level `superKey` and `superToken`. i.e.:
+  * Customer level: `key={API_KEY}&token={API_TOKEN}`
+  * App level: `superKey={SUPER_API_KEY}&superToken={SUPER_API_TOKEN}`
 
 When your API `key/token` are supplied incorrectly, you will get a few possible `HTTP 4xx` returns with JSON body with information in field `message` that are:
 
