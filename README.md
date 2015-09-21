@@ -74,9 +74,11 @@ _Get an array of customer objects belonging to that SUPER USER_
 _Get the information about a specific customer (self)_
 
 ### Campaigns
+
+> `?cuid=<customer ID>` query string parameter is needed for all Campaigns endpoints below.
+
 ####**POST** /campaign
 
-**Requires cuid as query string**
 ```javascript
 {
     name: STRING,
@@ -91,17 +93,14 @@ _Create a new campaign for the given customer_
 **Response** will include `{cid: [CAMPAIGN ID]}` to be used in future API calls
 
 ####**GET** /campaign
-**Requires cuid as query string**
 
 _Get a list of owned campaigns by the advertiser.._
 
 ####**GET** /campaign/**:cid**
-**Requires cuid as query string**
 
 _Get a specific campaign owned by the advertiser._
 
 ####**PUT** /campaign/**:cid**
-**Requires cuid as query string**
 
 __*__ Denotes optional parameter
 ```javascript
@@ -116,24 +115,23 @@ __*__ Denotes optional parameter
 _Edit a campaign owned by the advertiser. Only supplied fields are edited. $set behaviour_
 
 ####**PUT** /campaign/**:cid**/pause
-**Requires cuid as query string**
 
 _Pause the given campaign_
 
 ####**PUT** /campaign/**:cid**/resume
-**Requires cuid as query string**
 
 _Resume the given campaign_
 
 ####**DELETE** /campaign/**:cid**
-**Requires cuid as query string**
 
 _Removes the campaign from API access._
 
 
 ### Personas
+
+> `?cuid=<customer ID>` query string parameter is needed for all Personas endpoints below.
+
 ####**POST** /campaign/**:cid**/persona
-**Requires cuid as query string**
 
 __*__ Denotes optional parameter
 ```javascript
@@ -163,17 +161,14 @@ _Create a new persona for the given campaign_
 **Response** will include `{pid: [PERSONA ID]}` to be used in future API calls
 
 ####**GET** /campaign/**:cid**/persona
-**Requires cuid as query string**
 
 _Get the list of personas belonging to a campaign._
 
 ####**GET** /campaign/**:cid**/persona/**:pid**
-**Requires cuid as query string**
 
 _Get a specific persona belonging to a campaign_
 
 ####**PUT** /campaign/**:cid**/persona/**:pid**
-**Requires cuid as query string**
 
 __*__ Denotes optional parameter
 ```javascript
@@ -197,24 +192,23 @@ __*__ Denotes optional parameter
 _Edit a persona. Only supplied fields are edited. $set behaviour_
 
 ####**PUT** /campaign/**:cid**/persona/**:pid**/pause
-**Requires cuid as query string**
 
 _Pause the given persona_
 
 ####**PUT** /campaign/**:cid**/persona/**:pid**/resume
-**Requires cuid as query string**
 
 _Resume the given persona_
 
 ####**DELETE** /campaign/**:cid**/persona/**:pid**
-**Requires cuid as query string**
 
 _Removes the persona from API access._
 
 
 ### Banners
+
+> `?cuid=<customer ID>` query string parameter is needed for all Banners endpoints below.
+
 ####**POST** /campaign/**:cid**/persona/**:pid**/banner
-**Requires cuid as query string**
 ```javascript
 {
     name: STRING,
@@ -255,22 +249,21 @@ _Edit a specific banner for a given persona_
 _Detach and hide the given banner._
 
 ### Stats
+
+> `?cuid=<customer ID>` query string parameter is needed for all Stats endpoints below.
+
 ####**GET** /stats/campaign/**:cid**
-**Requires cuid as query string**
 _Get the summary stats for a campaign_
 
 ####**GET** /stats/campaign/**:cid**/timeseries
-**Requires cuid as query string**
 *start can be supplied as query string in form of timestamp*
 *end can be supplied as query string in form of timestamp*
 _Get the timeseries stats for a campaign_
 
 ####**GET** /stats/campaign/**:cid**/persona/**:pid**
-**Requires cuid as query string**
 _Get the summary stats for a persona_
 
 ####**GET** /stats/campaign/**:cid**/persona/**:pid**/timeseries
-**Requires cuid as query string**
 *start can be supplied as query string in form of timestamp*
 *end can be supplied as query string in form of timestamp*
 _Get the timeseries stats for a persona_
