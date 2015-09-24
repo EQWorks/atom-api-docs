@@ -98,6 +98,7 @@ On failure, the expected errors are:
 
 * `500` - server side error, usually a JSON with `message` field will be returned to give insights.
 * `404` - User not found.
+* `401` - User not allowed for API access.
 
 
 ####_GET_ /customer/:identifier/auth (__Requires App level super key/token__)
@@ -116,8 +117,9 @@ On success, it returns status code 200 and JSON
 On failure, the expected errors are:
 
 * `500` - server side error, usually a JSON with `message` field will be returned to give insights.
-* `401` - Expired or invalid passcode.
 * `404` - User not found.
+* `401` - Expired or invalid passcode.
+* `401` - User not allowed for API access.
 
 
 ### Campaigns
