@@ -103,7 +103,7 @@ On failure, the expected errors are:
 
 ####_GET_ /customer/:identifier/auth (__Requires App level super key/token__)
 
-Get newly generated or renewed __Customer level key/token__ with given `:identifier`, which can either be a `cuid` (Customer ID) or `email`.
+Get newly generated or renewed __Customer level key/token__ with given `:identifier`, which can either be a `cuid` (Customer ID) or `email`. When `:identifier` is `email`, an additional query string arg `passcode=<passcode>` must exist in order for the endpoint to work.
 
 On success, it returns status code 200 and JSON
 ```json
