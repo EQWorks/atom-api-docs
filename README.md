@@ -16,13 +16,13 @@ We utilize SSL to secure the transfer of these values.
 
 There are two ways for client to supply API `key` and `token`:
 
-* __HTTP Header__ keyed on `x-access-key` and `x-access-token`, or for App level `x-access-superKey` and `x-access-superToken`. i.e.:
+* __HTTP Header__ keyed on `x-access-key` and `x-access-token`, or for App level `x-access-superkey` and `x-access-supertoken`. i.e.:
   * Customer level: `x-access-key: {API_KEY}; x-access-token: {API_TOKEN}`
-  * App level: `x-access-superKey: {SUPER_API_KEY}; x-access-superToken: {SUPER_API_TOKEN}`
+  * App level: `x-access-superkey: {SUPER_API_KEY}; x-access-supertoken: {SUPER_API_TOKEN}`
 
-* __URL Query String__ keyed on `key` and `token`, or for App level `superKey` and `superToken`. i.e.:
+* __URL Query String__ keyed on `key` and `token`, or for App level `superkey` and `supertoken`. i.e.:
   * Customer level: `key={API_KEY}&token={API_TOKEN}`
-  * App level: `superKey={SUPER_API_KEY}&superToken={SUPER_API_TOKEN}`
+  * App level: `superkey={SUPER_API_KEY}&supertoken={SUPER_API_TOKEN}`
 
 When your API `key/token` are supplied incorrectly, you will get a few possible `HTTP 4xx` returns with JSON body with information in field `message` that are:
 
