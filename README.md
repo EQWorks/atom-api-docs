@@ -91,10 +91,15 @@ _Create a new campaign for the given customer_
 **Response** will include `{cid: [CAMPAIGN ID]}` to be used in future API calls
 
 ####**GET** /campaign
+<<<<<<< Updated upstream
 **Requires cuid as query string**
 **Example Response**
+=======
+**Requires cuid as query string** 
+>>>>>>> Stashed changes
 ```javascript
 [
+  // Example Response
   {
     "cid": INT (cid),
     "cuid": INT (cuid as supplied),
@@ -120,9 +125,14 @@ _Create a new campaign for the given customer_
 _Get a list of owned campaigns by the advertiser.._
 
 ####**GET** /campaign/**:cid**
+<<<<<<< Updated upstream
 **Requires cuid as query string**
 **Example Response**
+=======
+**Requires cuid as query string** 
+>>>>>>> Stashed changes
 ```javascript
+// Example Response
 {
   "cid": INT (cid),
   "cuid": INT (cuid as supplied),
@@ -297,8 +307,8 @@ _Detach and hide the given banner._
 ###**General Performance Stats**
 ####**GET** /stats/[ID]/summary
 _Get the summary stats for a campaign_  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "imps": 0,
@@ -314,8 +324,8 @@ _Get the summary stats for a campaign_
 *start can be supplied as query string in form of timestamp*  
 *end can be supplied as query string in form of timestamp*  
 _Get the timeseries stats for a campaign_  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "timeseries": [
@@ -348,8 +358,8 @@ _Get the timeseries stats for a campaign_
 
 ####**GET** /stats/[ID]/domains/breakdown
 _Get top 10 domains served to, along with their relative percentage and stats_  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "last_updated": [UNIX Timestamp],
@@ -376,8 +386,8 @@ _Get top 10 domains served to, along with their relative percentage and stats_
 
 ####**GET** /stats/[ID]/apps/breakdown
 _Get top 10 apps served to, along with their relative percentage and stats_  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "last_updated": [UNIX Timestamp],
@@ -404,8 +414,8 @@ _Get top 10 apps served to, along with their relative percentage and stats_
 
 ####**GET** /stats/[ID]/os/breakdown
 _Get stats of each of the OS served to at a high level_  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "last_updated": [UNIX Timestamp],
@@ -432,8 +442,8 @@ _Get stats of each of the OS served to at a high level_
 
 ####**GET** /stats/[ID]/banners/breakdown
 _Get basic stats on top 10 banners, including its relative percentage of amount served_  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "last_updated": [UNIX Timestamp],
@@ -460,8 +470,8 @@ _Get basic stats on top 10 banners, including its relative percentage of amount 
 
 ####**GET** /stats/[ID]/actions/breakdown
 _Get basic stats on actions to show the user funnel_  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "last_updated": [UNIX Timestamp],
@@ -507,8 +517,8 @@ _Get basic stats on actions to show the user funnel_
 ####**GET** /stats/[ID]/domains
 _Get full domain stats for every domain served to_  
 **Allows:** *start, end, sort, limit, page*  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "data": [
@@ -526,8 +536,8 @@ _Get full domain stats for every domain served to_
 ####**GET** /stats/[ID]/apps
 _Get full app stats for every app served to_  
 **Allows:** *start, end, sort, limit, page*  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "data": [
@@ -553,8 +563,8 @@ _Get full app stats for every app served to_
 _Get geo data based on Lat and Lon of request_  
 **Resolution of 0.25 degrees, ~2.5km**  
 **Allows:** *start, end*  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "data": {
@@ -586,8 +596,8 @@ _Get geo data based on Lat and Lon of request_
 ####**GET** /stats/[ID]/geo/city
 _Get geo data based on city of request_  
 **Allows:** *start, end*  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "data": {
@@ -622,8 +632,8 @@ _Get geo data based on city of request_
 ####**GET** /stats/[ID]/banners
 _Get detailed banner data_  
 **Allows:** *start, end*  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "data": [
@@ -641,8 +651,8 @@ _Get detailed banner data_
 ####**GET** /stats/[ID]/factual
 _Get detailed factual (service) data_  
 **Allows:** *start, end*  
-**Example Response**
 ```javascript
+// Example Response
 {
   "id": [ID],
   "data": [
