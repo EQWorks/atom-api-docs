@@ -92,12 +92,48 @@ _Create a new campaign for the given customer_
 
 ####**GET** /campaign
 **Requires cuid as query string**
-
+**Example Response**
+```javascript
+[
+  {
+    "cid": INT (cid),
+    "cuid": INT (cuid as supplied),
+    "start": 1432339200,
+    "end": 1436572740,
+    "name": "Campaign 1",
+    "enabled": BIT (true or false),
+    "freq": INT (Offer frequency cap),
+    "dailySpend": FLOAT (2 decimal places)
+  },
+  {
+    "cid": INT (cid),
+    "cuid": INT (cuid as supplied),
+    "start": 1433980800,
+    "end": 1435967940,
+    "name": "Campaign 2",
+    "enabled": BIT (true or false),
+    "freq": INT (Offer frequency cap),
+    "dailySpend": FLOAT (2 decimal places)
+  }
+]
+```
 _Get a list of owned campaigns by the advertiser.._
 
 ####**GET** /campaign/**:cid**
 **Requires cuid as query string**
-
+**Example Response**
+```javascript
+{
+  "cid": INT (cid),
+  "cuid": INT (cuid as supplied),
+  "start": 1432339200,
+  "end": 1436572740,
+  "name": "Campaign 1",
+  "enabled": BIT (true or false),
+  "freq": INT (Offer frequency cap),
+  "dailySpend": FLOAT (2 decimal places)
+}
+```
 _Get a specific campaign owned by the advertiser._
 
 ####**PUT** /campaign/**:cid**
