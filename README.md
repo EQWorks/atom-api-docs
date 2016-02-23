@@ -142,11 +142,49 @@ _Create a new campaign for the given customer_
 **Response** will include `{cid: [CAMPAIGN ID]}` to be used in future API calls
 
 ####**GET** /campaign
-
+**Requires cuid as query string** 
+```javascript
+[
+  // Example Response
+  {
+    "cid": INT (cid),
+    "cuid": INT (cuid as supplied),
+    "start": 1432339200,
+    "end": 1436572740,
+    "name": "Campaign 1",
+    "enabled": BIT (true or false),
+    "freq": INT (Offer frequency cap),
+    "dailySpend": FLOAT (2 decimal places)
+  },
+  {
+    "cid": INT (cid),
+    "cuid": INT (cuid as supplied),
+    "start": 1433980800,
+    "end": 1435967940,
+    "name": "Campaign 2",
+    "enabled": BIT (true or false),
+    "freq": INT (Offer frequency cap),
+    "dailySpend": FLOAT (2 decimal places)
+  }
+]
+```
 _Get a list of owned campaigns by the advertiser.._
 
 ####**GET** /campaign/**:cid**
-
+**Requires cuid as query string** 
+```javascript
+// Example Response
+{
+  "cid": INT (cid),
+  "cuid": INT (cuid as supplied),
+  "start": 1432339200,
+  "end": 1436572740,
+  "name": "Campaign 1",
+  "enabled": BIT (true or false),
+  "freq": INT (Offer frequency cap),
+  "dailySpend": FLOAT (2 decimal places)
+}
+```
 _Get a specific campaign owned by the advertiser._
 
 ####**PUT** /campaign/**:cid**
@@ -297,22 +335,370 @@ _Edit a specific banner for a given persona_
 ####**DELETE** /campaign/**:cid**/persona/**:pid**/banner/**:bid**
 _Detach and hide the given banner._
 
-### Stats
+## Stats & Reporting
+**In the following routes [ID] refers to CID or FID or PID**  
+**All of the following requires cuid as query string**
 
-> `?cuid=<customer ID>` query string parameter is needed for all Stats endpoints below.
+###**General Performance Stats**
+####**GET** /stats/[ID]/summary
+_Get the summary stats for a campaign_  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "imps": 0,
+  "clicks": 0,
+  "actions": 0,
+  "spend": 0,
+  "ctr": 0,
+  "cnvr": 0
+}
+```
 
-####**GET** /stats/campaign/**:cid**
-_Get the summary stats for a campaign_
+####**GET** /stats/[CID or PID]/timeseries
+*start can be supplied as query string in form of timestamp*  
+*end can be supplied as query string in form of timestamp*  
+_Get the timeseries stats for a campaign_  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "timeseries": [
+    {
+      "date": [UNIX TIMESTAMP],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "spend": 0,
+      "ctr": 0,
+      "cnvr": 0
+    },
+    {
+      "date": [UNIX TIMESTAMP],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "spend": 0,
+      "ctr": 0,
+      "cnvr": 0
+    }
+  ]
+}
+```
 
-####**GET** /stats/campaign/**:cid**/timeseries
-*start can be supplied as query string in form of timestamp*
-*end can be supplied as query string in form of timestamp*
-_Get the timeseries stats for a campaign_
+###**Breakdown Reporting**
+**The following routes provide fast serving data for immediate data visualization**  
+**This data will not accept any query parameters, and will be updated daily**
 
-####**GET** /stats/campaign/**:cid**/persona/**:pid**
-_Get the summary stats for a persona_
 
-####**GET** /stats/campaign/**:cid**/persona/**:pid**/timeseries
-*start can be supplied as query string in form of timestamp*
-*end can be supplied as query string in form of timestamp*
-_Get the timeseries stats for a persona_
+####**GET** /stats/[ID]/domains/breakdown
+_Get top 10 domains served to, along with their relative percentage and stats_  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "last_updated": [UNIX Timestamp],
+  "breakdown": [
+    {
+      "name": [TLD],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+    {
+      "name": [TLD],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+  ]
+}
+```
+
+####**GET** /stats/[ID]/apps/breakdown
+_Get top 10 apps served to, along with their relative percentage and stats_  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "last_updated": [UNIX Timestamp],
+  "breakdown": [
+    {
+      "name": [APP NAME],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+    {
+      "name": [APP NAME],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+  ]
+}
+```
+
+####**GET** /stats/[ID]/os/breakdown
+_Get stats of each of the OS served to at a high level_  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "last_updated": [UNIX Timestamp],
+  "breakdown": [
+    {
+      "name": [OS NAME],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+    {
+      "name": [OS NAME],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+  ]
+}
+```
+
+####**GET** /stats/[ID]/banners/breakdown
+_Get basic stats on top 10 banners, including its relative percentage of amount served_  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "last_updated": [UNIX Timestamp],
+  "breakdown": [
+    {
+      "name": [Banner Name],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+    {
+      "name": [Banner Name],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "percentage": [For ease of use in charting]
+    },
+  ]
+}
+```
+
+####**GET** /stats/[ID]/actions/breakdown
+_Get basic stats on actions to show the user funnel_  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "last_updated": [UNIX Timestamp],
+  "breakdown": [
+    {
+      "name": [Action Name],
+      "hierarchy": [The lower the number, the earlier in the pipeline]
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+    },
+    {
+      "name": [Action Name],
+      "hierarchy": [The lower the number, the earlier in the pipeline]
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+    }
+  ]
+}
+```
+
+###**Detailed Reporting**
+**The following routes have the potential to return large quantities of data**  
+**Data returned will be filtered based on query parameters listed, as well as pagination**
+
+
+####Common Query Parameters
+**start** *can be supplied as query string in form of timestamp*    
+**end** *can be supplied as query string in form of timestamp*  
+**sort** *can be supplied as a query string, giving a column name and direction to sort by*   
+&nbsp;&nbsp;&nbsp;&nbsp;**direction:** *asc or desc*  
+&nbsp;&nbsp;&nbsp;&nbsp;**DEFAULT: imps:asc** *if available*   
+**limit** *can be supplied as a query string giving number of results per page*  
+&nbsp;&nbsp;&nbsp;&nbsp;**DEFAULT: 25**  
+&nbsp;&nbsp;&nbsp;&nbsp;**Max: 100**   
+**page** *can be supplied as a query string for pagination, indicating page required*  
+&nbsp;&nbsp;&nbsp;&nbsp;**DEFAULT: 1**
+
+
+####**GET** /stats/[ID]/domains
+_Get full domain stats for every domain served to_  
+**Allows:** *start, end, sort, limit, page*  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "data": [
+    {
+      "name": [TLD],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0
+    }
+  ]
+}
+```
+
+####**GET** /stats/[ID]/apps
+_Get full app stats for every app served to_  
+**Allows:** *start, end, sort, limit, page*  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "data": [
+    {
+      "name": [App Name],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+      "store": [1-Apple, 2-Google Play, 3-Amazon],
+      "developer": [Developer Name],
+      "logo": [Logo img url],
+      "rating": [1-5, rounded to nearest 0.5],
+      "download": [String number of download, eg. 100000-500000],
+      "mobile": [Binary]
+      "tablet": [Binary],
+    }
+  ]
+}
+```
+
+####**GET** /stats/[ID]/geo/hyperlocal
+_Get geo data based on Lat and Lon of request_  
+**Resolution of 0.25 degrees, ~2.5km**  
+**Allows:** *start, end*  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "data": {
+    "imps": [
+      {
+        "lat": [LATTITUDE],
+        "long": [LONGITUDE],
+        "z": [imps]
+      }
+    ],
+    "clicks": [
+      {
+        "lat": [LATTITUDE],
+        "long": [LONGITUDE],
+        "z": [clicks]
+      }
+    ],
+    "ctr": [
+      {
+        "lat": [LATTITUDE],
+        "long": [LONGITUDE],
+        "z": [ctr]
+      }
+    ]
+  }
+}
+```
+
+####**GET** /stats/[ID]/geo/city
+_Get geo data based on city of request_  
+**Allows:** *start, end*  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "data": {
+    "imps": [
+      {
+        "lat": [LATTITUDE],
+        "long": [LONGITUDE],
+        "z": [imps],
+        "city": [City Name]
+      }
+    ],
+    "clicks": [
+      {
+        "lat": [LATTITUDE],
+        "long": [LONGITUDE],
+        "z": [clicks],
+        "city": [City Name]
+      }
+    ],
+    "ctr": [
+      {
+        "lat": [LATTITUDE],
+        "long": [LONGITUDE],
+        "z": [ctr],
+        "city": [City Name]
+      }
+    ]
+  }
+}
+```
+
+####**GET** /stats/[ID]/banners
+_Get detailed banner data_  
+**Allows:** *start, end*  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "data": [
+    {
+      "name": [Banner Name],
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+    } 
+  ]
+}
+```
+
+####**GET** /stats/[ID]/factual
+_Get detailed factual (service) data_  
+**Allows:** *start, end*  
+```javascript
+// Example Response
+{
+  "id": [ID],
+  "data": [
+    {
+      "name": [Factual Group ID],
+      "index": [Factual Index]
+      "imps": 0,
+      "clicks": 0,
+      "actions": 0,
+      "ctr": 0,
+    } 
+  ]
+}
+```
