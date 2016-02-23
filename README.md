@@ -2,25 +2,27 @@
 
 CRUD API for ATOM, exposing interactions with Customer, Campaign, Persona, and Banners.
 
+Contact us for any issues, concerns and questions at <api@atom.works>.
+
 ## Authentication
 
 There are **2** levels of API 'key/token' pairs for interaction with the API:
 
-**APP Level Super key/token** Gives your App access to the *Customer Create*, and the *Get Many Customers* routes.
+**App level super key/token** Gives your App access to the *Customer Create*, and the *Get Many Customers* routes.
 
-**Customer Level key/token** This is provided as a response to the Customer Creation method, and is to be used for interactions with campaigns/banners/personas/etc. for that specific customer (user).
+**Customer level key/token** This is provided as a response to the Customer Creation method, and is to be used for interactions with campaigns/banners/personas/etc. for that specific customer (user).
 
 We utilize SSL to secure the transfer of these values.
 
 There are two ways for client to supply API `key` and `token`:
 
-* __HTTP Header__ keyed on `x-access-key` and `x-access-token`, i.e.:
-  `x-access-superKey: {SUPER_API_KEY}; x-access-superToken: {SUPER_API_TOKEN}`
-  `x-access-key: {API_KEY}; x-access-token: {API_TOKEN}`
+* __HTTP Header__ keyed on `x-access-key` and `x-access-token`, or for App level `x-access-superkey` and `x-access-supertoken`. i.e.:
+  * Customer level: `x-access-key: {API_KEY}; x-access-token: {API_TOKEN}`
+  * App level: `x-access-superkey: {SUPER_API_KEY}; x-access-supertoken: {SUPER_API_TOKEN}`
 
-* __URL Query String__ keyed on `key` and `token`, i.e.:
-  `superKey={SUPER_API_KEY}&superToken={SUPER_API_TOKEN}`
-  `key={API_KEY}&token={API_TOKEN}`
+* __URL Query String__ keyed on `key` and `token`, or for App level `superkey` and `supertoken`. i.e.:
+  * Customer level: `key={API_KEY}&token={API_TOKEN}`
+  * App level: `superkey={SUPER_API_KEY}&supertoken={SUPER_API_TOKEN}`
 
 When your API `key/token` are supplied incorrectly, you will get a few possible `HTTP 4xx` returns with JSON body with information in field `message` that are:
 
@@ -36,7 +38,7 @@ Under rare conditions, you should also anticipate some `HTTP 500` returns with J
 Most routes in this API will expect a query string of `cuid=[CUSTOMER ID]`, which is returned upon successful creation of a customer.
 
 ### Customers
-####**POST** /customer (SUPER AUTH METHOD)
+####**POST** /customer (__Requires App level super key/token__)
 
 __*__ Denotes optional parameter
 ```javascript
@@ -66,17 +68,66 @@ _Create a new customer record in ATOM_
 These are to be used for that specific customer in future API calls
 
 
-####**GET** /customer/ (SUPER AUTH METHOD)
+####**GET** /customer/ (__Requires App level super key/token__)
 _Get an array of customer objects belonging to that SUPER USER_
 
 
 ####**GET** /customer/**:cuid**
 _Get the information about a specific customer (self)_
 
+
+####_GET_ /customer/_:email_/passcode (__Requires App level super key/token__)
+
+Sends passcode to a specific customer by `:email`. This is to support the auth workflow that is very similar to <atom.works> the web UI. Your app auth workflow should be something like:
+
+1. Get `:email` from your app user
+2. Call this API endpoint to get the passcode generated and sent to the provided `:email`
+3. Get passcode from your app user
+4. Call `/customer/:identifier/auth` endpoint to retrieve this app user's __Customer level key/token__
+
+__Note:__ this currently only supports emails that match existing <atom.works> or <insights.eqworks.com> web UI users.
+
+On success, it returns status code 200 and JSON
+```json
+{
+  "message": "We have emailed the passcode to: <:email>"
+}
+```
+
+On failure, the expected errors are:
+
+* `500` - server side error, usually a JSON with `message` field will be returned to give insights.
+* `404` - User not found.
+* `401` - User not allowed for API access.
+
+
+####_GET_ /customer/:identifier/auth (__Requires App level super key/token__)
+
+Get newly generated or renewed __Customer level key/token__ with given `:identifier`, which can either be a `cuid` (Customer ID) or `email`. When `:identifier` is `email`, an additional query string arg `passcode=<passcode>` must exist in order for the endpoint to work.
+
+On success, it returns status code 200 and JSON
+```json
+{
+  "cuid": "<Customer ID required by other endpoints>",
+  "key": "<Customer level API key>",
+  "token": "<Customer level API token>"
+}
+```
+
+On failure, the expected errors are:
+
+* `500` - server side error, usually a JSON with `message` field will be returned to give insights.
+* `404` - User not found.
+* `401` - Expired or invalid passcode.
+* `401` - User not allowed for API access.
+
+
 ### Campaigns
+
+> `?cuid=<customer ID>` query string parameter is needed for all Campaigns endpoints below.
+
 ####**POST** /campaign
 
-**Requires cuid as query string**
 ```javascript
 {
     name: STRING,
@@ -137,7 +188,6 @@ _Get a list of owned campaigns by the advertiser.._
 _Get a specific campaign owned by the advertiser._
 
 ####**PUT** /campaign/**:cid**
-**Requires cuid as query string**
 
 __*__ Denotes optional parameter
 ```javascript
@@ -152,24 +202,23 @@ __*__ Denotes optional parameter
 _Edit a campaign owned by the advertiser. Only supplied fields are edited. $set behaviour_
 
 ####**PUT** /campaign/**:cid**/pause
-**Requires cuid as query string**
 
 _Pause the given campaign_
 
 ####**PUT** /campaign/**:cid**/resume
-**Requires cuid as query string**
 
 _Resume the given campaign_
 
 ####**DELETE** /campaign/**:cid**
-**Requires cuid as query string**
 
 _Removes the campaign from API access._
 
 
 ### Personas
+
+> `?cuid=<customer ID>` query string parameter is needed for all Personas endpoints below.
+
 ####**POST** /campaign/**:cid**/persona
-**Requires cuid as query string**
 
 __*__ Denotes optional parameter
 ```javascript
@@ -199,17 +248,14 @@ _Create a new persona for the given campaign_
 **Response** will include `{pid: [PERSONA ID]}` to be used in future API calls
 
 ####**GET** /campaign/**:cid**/persona
-**Requires cuid as query string**
 
 _Get the list of personas belonging to a campaign._
 
 ####**GET** /campaign/**:cid**/persona/**:pid**
-**Requires cuid as query string**
 
 _Get a specific persona belonging to a campaign_
 
 ####**PUT** /campaign/**:cid**/persona/**:pid**
-**Requires cuid as query string**
 
 __*__ Denotes optional parameter
 ```javascript
@@ -233,24 +279,23 @@ __*__ Denotes optional parameter
 _Edit a persona. Only supplied fields are edited. $set behaviour_
 
 ####**PUT** /campaign/**:cid**/persona/**:pid**/pause
-**Requires cuid as query string**
 
 _Pause the given persona_
 
 ####**PUT** /campaign/**:cid**/persona/**:pid**/resume
-**Requires cuid as query string**
 
 _Resume the given persona_
 
 ####**DELETE** /campaign/**:cid**/persona/**:pid**
-**Requires cuid as query string**
 
 _Removes the persona from API access._
 
 
 ### Banners
+
+> `?cuid=<customer ID>` query string parameter is needed for all Banners endpoints below.
+
 ####**POST** /campaign/**:cid**/persona/**:pid**/banner
-**Requires cuid as query string**
 ```javascript
 {
     name: STRING,
