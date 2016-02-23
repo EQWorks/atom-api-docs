@@ -91,12 +91,7 @@ _Create a new campaign for the given customer_
 **Response** will include `{cid: [CAMPAIGN ID]}` to be used in future API calls
 
 ####**GET** /campaign
-<<<<<<< Updated upstream
-**Requires cuid as query string**
-**Example Response**
-=======
 **Requires cuid as query string** 
->>>>>>> Stashed changes
 ```javascript
 [
   // Example Response
@@ -125,12 +120,7 @@ _Create a new campaign for the given customer_
 _Get a list of owned campaigns by the advertiser.._
 
 ####**GET** /campaign/**:cid**
-<<<<<<< Updated upstream
-**Requires cuid as query string**
-**Example Response**
-=======
 **Requires cuid as query string** 
->>>>>>> Stashed changes
 ```javascript
 // Example Response
 {
