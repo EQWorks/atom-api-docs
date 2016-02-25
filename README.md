@@ -76,7 +76,19 @@ _Get an array of customer objects belonging to that SUPER USER_
 _Get the information about a specific customer (self)_
 
 
-####_GET_ /customer/_:email_/passcode (__Requires App level super key/token__)
+####_GET_ /customer/_:email_/sso (__Requires App level super key/token__)
+
+"Single Sign On" to `ATOM` powered platforms, including [ATOM](https://atom.works) and white labeled ones, for a specific customer by `:email`.
+
+On success, it redirects the user to designated `ATOM` powered platform with a status code 302.
+
+On failure, the expected errors:
+
+* `500` - server side error, usually a JSON with `message` field will be returned to give insights.
+* `404` - User not found.
+* `401` - User not allowed for API access.
+
+####_GET_ /customer/_:email_/passcode (__Requires App level super key/token__, and special provisioning on App level access)
 
 Sends passcode to a specific customer by `:email`. This is to support the auth workflow that is very similar to <atom.works> the web UI. Your app auth workflow should be something like:
 
@@ -84,8 +96,6 @@ Sends passcode to a specific customer by `:email`. This is to support the auth w
 2. Call this API endpoint to get the passcode generated and sent to the provided `:email`
 3. Get passcode from your app user
 4. Call `/customer/:identifier/auth` endpoint to retrieve this app user's __Customer level key/token__
-
-__Note:__ this currently only supports emails that match existing <atom.works> or <insights.eqworks.com> web UI users.
 
 On success, it returns status code 200 and JSON
 ```json
@@ -120,6 +130,10 @@ On failure, the expected errors are:
 * `404` - User not found.
 * `401` - Expired or invalid passcode.
 * `401` - User not allowed for API access.
+
+####_GET_ /customer/:email/auth/nopasscode (__Requires App level super key/token__, and special provisioning on App level access)
+
+Similar to [`/customer/:identifier/auth`](#get-customeridentifierauth-requires-app-level-super-keytoken) except that `:identifier` is limited to only `:email` and behaves exactly like when `:identifier` is a `cuid` (Customer ID) where no passcode is checked. Responses are also identical to `/customer/:identifier/auth` endpoint.
 
 
 ### Campaigns
