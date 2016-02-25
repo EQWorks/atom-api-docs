@@ -88,7 +88,7 @@ On failure, the expected errors:
 * `404` - User not found.
 * `401` - User not allowed for API access.
 
-####_GET_ /customer/_:email_/passcode (__Requires App level super key/token__)
+####_GET_ /customer/_:email_/passcode (__Requires App level super key/token__, and special provisioning on App level access)
 
 Sends passcode to a specific customer by `:email`. This is to support the auth workflow that is very similar to <atom.works> the web UI. Your app auth workflow should be something like:
 
@@ -130,6 +130,10 @@ On failure, the expected errors are:
 * `404` - User not found.
 * `401` - Expired or invalid passcode.
 * `401` - User not allowed for API access.
+
+####_GET_ /customer/:email/auth/nopasscode (__Requires App level super key/token__, and special provisioning on App level access)
+
+Similar to [`/customer/:identifier/auth`](#get-customeridentifierauth-requires-app-level-super-keytoken) except that `:identifier` is limited to only `:email` and behaves exactly like when `:identifier` is a `cuid` (Customer ID) where no passcode is checked. Responses are also identical to `/customer/:identifier/auth` endpoint.
 
 
 ### Campaigns
