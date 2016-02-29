@@ -23,4 +23,4 @@ Stats and reporting APIs.
 
 ### Draft
 
-There are ongoing draft documentations that forecast upcoming improvements to the APIs. You can find them [here](draft/). We welcome your feedback on those, however we would suggest that you do not build anything relying on them.
+There are ongoing draft documentations that forecast upcoming improvements to the APIs. You can find them [here](draft/DRAFT.md). We welcome your feedback on those, however we would suggest that you do not build anything relying on them.
