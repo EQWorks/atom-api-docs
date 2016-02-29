@@ -1,64 +1,167 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
-  <meta charset="utf-8">
-  
-  <title>Campaigns API | ATOM APIs</title>
-  <meta name="author" content="EQ Works">
-  
-  <meta name="description" content="ATOM APIs">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <meta property="og:title" content="Campaigns API"/>
-  <meta property="og:site_name" content="ATOM APIs"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/atom-api-docs/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/atom-api-docs/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/atom-api-docs/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="eqworks,atom,apis,api,documentation," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/atom-api-docs/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Campaigns
+?cuid=&amp;lt;customer ID&amp;gt; query string parameter is needed for all Campaigns endpoints below.
+
+POST /campaign1234567&amp;#123;    name: STRING,    start: INT (Timestamp),    end: INT (Timestamp)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Campaigns API">
+<meta property="og:url" content="https://eqworks.github.io/atom-api-docs/api/campaigns/index.html">
+<meta property="og:site_name" content="ATOM APIs">
+<meta property="og:description" content="Campaigns
+?cuid=&amp;lt;customer ID&amp;gt; query string parameter is needed for all Campaigns endpoints below.
+
+POST /campaign1234567&amp;#123;    name: STRING,    start: INT (Timestamp),    end: INT (Timestamp)">
+<meta property="og:updated_time" content="2016-02-29T19:29:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Campaigns API">
+<meta name="twitter:description" content="Campaigns
+?cuid=&amp;lt;customer ID&amp;gt; query string parameter is needed for all Campaigns endpoints below.
+
+POST /campaign1234567&amp;#123;    name: STRING,    start: INT (Timestamp),    end: INT (Timestamp)">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title>
+  
 
   
-    <meta property="og:image" content="undefined"/>
+    Campaigns API | ATOM APIs
   
-
-  
-    <link rel="alternative" href="/atom-api-docs/atom.xml" title="ATOM APIs" type="application/atom+xml">
-  
-  
-    <link href="/atom-api-docs/favicon.png" rel="icon">
-  
-  
-  <link rel="stylesheet" href="/atom-api-docs/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/atom-api-docs/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/atom-api-docs/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/atom-api-docs/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/atom-api-docs/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/atom-api-docs/css/responsive.css" media="screen" type="text/css">  
-  <link rel="stylesheet" href="/atom-api-docs/css/sidenav.css" media="screen" type="text/css">  
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <script src="/atom-api-docs/js/jquery-2.0.3.min.js"></script>
-
-  <!-- analytics -->
-  
-
+</title>
 </head>
 
-<body id="body" data-spy="scroll" data-target=".toc">
-  <div class="container" id="container">
-	<div class="content">
-	  <div class="page-header">		
-  <h1><a class="brand" href="/atom-api-docs/">ATOM APIs</a><span class="split"></span><span class="title">Campaigns API</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2016-02-29</span></h1>
-</div>		
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
-<div class="row page">
-  <!-- cols -->	
+  
+
+
+
+
+
+
+
+
   
   
 
-  
-	<div class="col-md-12">
-	  
+  <div class="container one-collumn   ">
+    <div class="headband"></div>
 
-	  <!-- content -->
-	  <h1 id="Campaigns"><a href="#Campaigns" class="headerlink" title="Campaigns"></a>Campaigns</h1><blockquote>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/atom-api-docs/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ATOM APIs</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Documentation</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+      <h1 id="Campaigns"><a href="#Campaigns" class="headerlink" title="Campaigns"></a>Campaigns</h1><blockquote>
 <p><code>?cuid=&lt;customer ID&gt;</code> query string parameter is needed for all Campaigns endpoints below.</p>
 </blockquote>
 <h3 id="POST-campaign"><a href="#POST-campaign" class="headerlink" title="POST /campaign"></a><strong>POST</strong> /campaign</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    name: STRING,</span><br><span class="line">    start: INT (Timestamp),</span><br><span class="line">    end: INT (Timestamp),</span><br><span class="line">    frequency: INT,</span><br><span class="line">    dailySpend: FLOAT (<span class="number">2</span> decimal places)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -73,65 +176,172 @@
 <h3 id="PUT-campaign-cid-pause"><a href="#PUT-campaign-cid-pause" class="headerlink" title="PUT /campaign/:cid/pause"></a><strong>PUT</strong> /campaign/<strong>:cid</strong>/pause</h3><p><em>Pause the given campaign</em></p>
 <h3 id="PUT-campaign-cid-resume"><a href="#PUT-campaign-cid-resume" class="headerlink" title="PUT /campaign/:cid/resume"></a><strong>PUT</strong> /campaign/<strong>:cid</strong>/resume</h3><p><em>Resume the given campaign</em></p>
 <h3 id="DELETE-campaign-cid"><a href="#DELETE-campaign-cid" class="headerlink" title="DELETE /campaign/:cid"></a><strong>DELETE</strong> /campaign/<strong>:cid</strong></h3><p><em>Removes the campaign from API access.</em></p>
-	  
 
-	  <div>
-  		<center>
-		  <div class="pagination">
-<ul class="pagination">
-	
-	
-	
-	
-	
-	
-		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
-	
-	<li><a href="/atom-api-docs/"><i class="fa fa-archive"></i>Home</a></li>
-	
-		<li class="next disabled"><a>next<i class="fa fa-arrow-circle-o-right"></i></a></li>
-	
-</ul>
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/atom-api-docs/images/default_avatar.jpg"
+               alt="EQ Works" />
+          <p class="site-author-name" itemprop="name">EQ Works</p>
+          <p class="site-description motion-element" itemprop="description">ATOM APIs</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/atom-api-docs/">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+          
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EQ Works</span>
 </div>
 
-		</center>
-	  </div>
-	  
-	</div> <!-- col-md-9/col-md-12 -->
-	
-  </div><!-- row -->
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
 
-	</div>
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
   </div>
-  <div class="container-narrow">
-	<footer> <p>
-  &copy; 2016 EQ Works
+
   
-      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
-</p> </footer>
-  </div> <!-- container-narrow -->
+
+
   
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
-
-<script src="/atom-api-docs/js/jquery.imagesloaded.min.js"></script>
-<script src="/atom-api-docs/js/gallery.js"></script>
-<script src="/atom-api-docs/js/bootstrap.min.js"></script>
-<script src="/atom-api-docs/js/jquery.tableofcontents.min.js"></script>
-<script src="/atom-api-docs/js/tocgenerator.min.js"></script>
-<script src="/atom-api-docs/js/main.js"></script>
 
 
 
+  <script type="text/javascript" src="/atom-api-docs/vendors/jquery/index.js?v=2.1.3"></script>
 
-<link rel="stylesheet" href="/atom-api-docs/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/atom-api-docs/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+  <script type="text/javascript" src="/atom-api-docs/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/atom-api-docs/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/atom-api-docs/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/atom-api-docs/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/atom-api-docs/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/atom-api-docs/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/atom-api-docs/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/atom-api-docs/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
 
 
 </body>
